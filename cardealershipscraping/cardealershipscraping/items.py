@@ -4,9 +4,15 @@
 # https://docs.scrapy.org/en/latest/topics/items.html
 
 import scrapy
+from scrapy.item import Item, Field
 
 
-class CardealershipscrapingItem(scrapy.Item):
-    # define the fields for your item here like:
-    # name = scrapy.Field()
-    pass
+class CarItem(scrapy.Item):
+    url= Field()
+    model= Field()
+    price= Field()
+    make= Field()
+    year= Field()
+    mileage= Field()
+    location= Field()
+    date_posted= Field()

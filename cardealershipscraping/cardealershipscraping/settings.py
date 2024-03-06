@@ -11,6 +11,7 @@ BOT_NAME = "cardealershipscraping"
 
 SPIDER_MODULES = ["cardealershipscraping.spiders"]
 NEWSPIDER_MODULE = "cardealershipscraping.spiders"
+USER_AGENT = "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/34.0.1847.131 Safari/537.36"
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
