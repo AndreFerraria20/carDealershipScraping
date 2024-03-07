@@ -2,6 +2,7 @@ import scrapy
 import csv 
 from cardealershipscraping.items import CarItem
 from scrapy.loader import ItemLoader
+from cardealershipscraping.itemLoaders import CarDealershipItemLoader
 
 class CardealsspiderSpider(scrapy.Spider):
     name = "carDealsSpider"
@@ -21,13 +22,10 @@ class CardealsspiderSpider(scrapy.Spider):
         url=response.meta["config"].pop('url')
         car_ads=response.xpath(response.meta["config"]['carDivs'])
         for car_ad in car_ads:
-            print("carad",car_ad)
-            l = ItemLoader(item=CarItem(), selector=car_ad)
+            l = CarDealershipItemLoader(item=CarItem(), selector=car_ad)
             for name,xpath in response.meta["config"].items():
                 if name=='carDivs':
                     break
                 if xpath != "":
-                    print(xpath)
-                    print("xpath",car_ad.xpath(xpath))
                     l.add_xpath(name,xpath)
-            print("item",l.load_item())
+            return l.load_item()
