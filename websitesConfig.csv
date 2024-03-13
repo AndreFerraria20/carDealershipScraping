@@ -1,0 +1,2 @@
+﻿url,model,price,make,year,mileage,location,date_posted,carDivs,next_Page,
+"https://www.standvirtual.com/carros",.//h1[@class='e1oqyyyi9 ooa-1ed90th er34gjf0']/a/text(),.//h3[@class='e1oqyyyi16 ooa-1n2paoq er34gjf0']/text()[1],"",.//dd[@data-parameter='first_registration_year']/text(),.//dd[@data-parameter='mileage']/text(),.//p[@class='ooa-gmxnzj']/text(),"",.//article[@class="ooa-yca59n e1oqyyyi0"],""

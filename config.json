@@ -1,0 +1,34 @@
+[
+    {
+        "website": "https://www.standvirtual.com/carros",
+        "is_rendered": false,
+        "to_extract": "",
+        "selector": ".//article[@class='ooa-yca59n e1oqyyyi0']",
+        "ad_data": {
+            "year": ".//dd[@data-parameter='first_registration_year']/text()",
+            "kilometrage": ".//dd[@data-parameter='mileage']/text()",
+            "price": ".//h3[@class='e1oqyyyi16 ooa-1n2paoq er34gjf0']/text()",
+            "ad_page": {
+                "page_url": ".//a/@href",
+                "make": "//div[@data-testid='advert-details-item'][p='Marca']/a/text()",
+                "model": "//div[@data-testid='advert-details-item'][p='Modelo']/a/text()"
+            }
+        }
+    },
+    {
+        "website": "https://www.auto.pt/carros-usados",
+        "is_rendered": false,
+        "to_extract": "",
+        "selector": "//div[contains(@class, 'entry vehicle-list-entry')]",
+        "ad_data": {
+            "ad_page": {
+                "page_url": "concat('https://www.auto.pt',.//a/@href)                ",
+                "year": ".//div[contains(@class, 'info')]/b[text()='Ano']/following-sibling::text()[1]",
+                "kilometrage": ".//div[@class='col-xs-12 col-ms-5 hidden-md hidden-lg']//li[contains(span, 'Km')]/text()",
+                "price": ".//div[@class='col-xs-3 price text-right']/text()",
+                "make": ".//ol[@class='breadcrumb hidden-xs hidden-ms']/li[3]/a/text()",
+                "model": "substring-after(.//ol[@class='breadcrumb hidden-xs hidden-ms']/li[5]/a/text(), ' ')"
+            }
+        }
+    }
+]

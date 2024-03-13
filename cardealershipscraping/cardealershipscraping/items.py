@@ -13,6 +13,6 @@ class CarItem(scrapy.Item):
     price= Field()
     make= Field()
     year= Field()
-    mileage= Field()
+    kilometrage= Field()
     location= Field()
     date_posted= Field()

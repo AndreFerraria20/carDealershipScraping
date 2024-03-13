@@ -10,4 +10,5 @@ from itemadapter import ItemAdapter
 
 class CardealershipscrapingPipeline:
     def process_item(self, item, spider):
+        print("ITEM:",item)
         return item
