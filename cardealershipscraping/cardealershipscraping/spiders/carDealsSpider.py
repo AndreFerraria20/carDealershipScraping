@@ -7,14 +7,14 @@ from cardealershipscraping.itemLoaders import CarDealershipItemLoader
 
 class CardealsspiderSpider(scrapy.Spider):
     name = "carDealsSpider"
-    #allowed_domains = [""]
-    start_urls = ['www.auto.pt']  # Start URL
+    allowed_domains = ["standvirtual.com"]
+    start_urls = ['https://www.standvirtual.com']  # Start URL
     def start_requests(self):
         with open('C:/Users/André/OneDrive/Documentos/Projetos/Webscraping/CarDealershipScraping/config.json') as file:
             data = json.load(file)
 
         for row in data:
-                url=row.get('website')
+                url=row.get('website').format(page_number=1)
                 yield scrapy.Request(url=url,callback=self.parse_car_deals,meta={'config':row, 'page_number':1})
 
     def parse_ad_page(self, response):
@@ -23,7 +23,6 @@ class CardealsspiderSpider(scrapy.Spider):
             ad_page_data = response.meta['ad_page']
             print("PARSING",ad_page_data)
             for name, xpath in ad_page_data.items():
-                print("nameADPAGE",name)
                 if name=='page_url':
                      continue
                 value = response.xpath(xpath).get()
@@ -39,14 +38,20 @@ class CardealsspiderSpider(scrapy.Spider):
             ad_data=response.meta['config']['ad_data']
             for name,xpath in ad_data.items():  
                 if name=='ad_page':
-                    print("adpageenter",ad_data['ad_page']['page_url'])
                     page_url = car_ad.xpath(ad_data['ad_page']['page_url']).get()
                     print("pageurl",page_url)
-                    l.add_value('url',page_url)
+                    #l.add_value('page_url',page_url)
                     break
                 if xpath != "":
                     l.add_xpath(name,xpath)
-            print("Yielding",ad_data)
+
+            if len(car_ads) !=0:  
+                response.meta['page_number']=response.meta['page_number']+1
+                print("website",response.meta['config']['website'])
+                url=response.meta['config']['website'].format(page_number=response.meta['page_number'])
+                print("next page url",url)
+                yield scrapy.Request(url=url, callback=self.parse_car_deals, meta={'config':response.meta['config'], 'page_number':response.meta['page_number']})
+
             if('ad_page' in ad_data and ad_data['ad_page'] != None):
                 yield scrapy.Request(url=page_url, callback=self.parse_ad_page, meta={'loader': l,'ad_page':ad_data['ad_page']})
             else:

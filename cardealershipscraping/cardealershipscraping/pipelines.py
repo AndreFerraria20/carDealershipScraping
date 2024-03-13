@@ -6,9 +6,13 @@
 
 # useful for handling different item types with a single interface
 from itemadapter import ItemAdapter
-
+from itertools import count
 
 class CardealershipscrapingPipeline:
+    counter = count(start=1)  # Start counting from 1
     def process_item(self, item, spider):
-        print("ITEM:",item)
+        print("counter item",next(self.counter))  # Output: 1
+
         return item
+
+
