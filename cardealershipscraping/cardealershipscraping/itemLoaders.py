@@ -1,6 +1,7 @@
 from scrapy.loader import ItemLoader
 from currency_converter import CurrencyConverter
 import operator as op
+import re
 
 from itemloaders.processors import MapCompose, TakeFirst
 
@@ -42,4 +43,6 @@ def clean_mileage(value):
 class CarDealershipItemLoader(ItemLoader):
     default_input_processor=TakeFirst()
     price_in=MapCompose(clean_price)
-    mileage_in=MapCompose(clean_mileage)
+    kilometrage_in=MapCompose(clean_mileage)
+    displacement_in=MapCompose(lambda x: int(re.sub(r'\D', '', x)))
+    potency_in=MapCompose(lambda x: int(re.sub(r'\D', '', x)))

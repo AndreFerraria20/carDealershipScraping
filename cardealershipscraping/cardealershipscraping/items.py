@@ -9,9 +9,13 @@ from scrapy.item import Item, Field
 
 class CarItem(scrapy.Item):
     url= Field()
-    model= Field()
-    price= Field()
     make= Field()
+    model= Field()
+    version=Field()
+    potency=Field()
+    fuel_type=Field()
+    displacement=Field()
+    price= Field()
     year= Field()
     kilometrage= Field()
     location= Field()
